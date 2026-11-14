@@ -4,9 +4,11 @@ import { ThanksgivingShort, THANKSGIVING_FRAMES } from "./videos/thanksgiving/Th
 import { PetRockShort, PETROCK_FRAMES } from "./videos/petrock/PetRock";
 import { PenguinShort, PENGUIN_FRAMES } from "./videos/penguin/Penguin";
 import { RoverShort, ROVER_FRAMES } from "./videos/rover/Rover";
+import { HugsShort, HUGS_FRAMES } from "./videos/hugs/Hugs";
 export const Root: React.FC = () => (<>
   <Composition id="ThanksgivingShort" component={ThanksgivingShort} durationInFrames={THANKSGIVING_FRAMES} fps={30} width={1080} height={1920} />
   <Composition id="PetRockShort" component={PetRockShort} durationInFrames={PETROCK_FRAMES} fps={30} width={1080} height={1920} />
   <Composition id="PenguinShort" component={PenguinShort} durationInFrames={PENGUIN_FRAMES} fps={30} width={1080} height={1920} />
   <Composition id="RoverShort" component={RoverShort} durationInFrames={ROVER_FRAMES} fps={30} width={1080} height={1920} />
+  <Composition id="HugsShort" component={HugsShort} durationInFrames={HUGS_FRAMES} fps={30} width={1080} height={1920} />
 </>);

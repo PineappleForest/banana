@@ -4,6 +4,7 @@
 #   COMP=PetRockShort               -> out/petrock_final.mp4       ("The Perfect Pet", the 1975 Pet Rock)
 #   COMP=PenguinShort               -> out/penguin_final.mp4       ("The Penguin Who Came Back", ~30 s)
 #   COMP=RoverShort                 -> out/rover_final.mp4         ("Happy Birthday, Alone", ~31 s)
+#   COMP=HugsShort                  -> out/hugs_final.mp4          ("Free Hugs", ~32 s)
 #   ./render.sh            -> out/thanksgiving_final.mp4  (1440x2560, 30 fps, h264 crf 16, soundtrack muxed)
 #   ./render.sh final --props='{"logo":true}'   extra options after the mode go to the renderer
 #                             (logo: put your logo at public/eliza/logo.png; captions:false = no subtitles)
@@ -20,7 +21,8 @@ case "$COMP" in
   PetRockShort) MIX=production-petrock/audio/mix.wav; VID=out/petrock_video.mp4; FIN=out/petrock_final.mp4; PRE=out/petrock_preview.mp4 ;;
   PenguinShort) MIX=production-penguin/audio/mix.wav; VID=out/penguin_video.mp4; FIN=out/penguin_final.mp4; PRE=out/penguin_preview.mp4 ;;
   RoverShort) MIX=production-rover/audio/mix.wav; VID=out/rover_video.mp4; FIN=out/rover_final.mp4; PRE=out/rover_preview.mp4 ;;
-  *) echo "unknown COMP=$COMP (ThanksgivingShort | PetRockShort | PenguinShort | RoverShort)"; exit 1 ;;
+  HugsShort) MIX=production-hugs/audio/mix.wav; VID=out/hugs_video.mp4; FIN=out/hugs_final.mp4; PRE=out/hugs_preview.mp4 ;;
+  *) echo "unknown COMP=$COMP (ThanksgivingShort | PetRockShort | PenguinShort | RoverShort | HugsShort)"; exit 1 ;;
 esac
 case "$MODE" in final|preview|remux) shift || true ;; *) MODE=final ;; esac
 EXTRA=("$@")

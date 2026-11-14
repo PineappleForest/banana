@@ -11,6 +11,7 @@ tools and look) and holds only the newer shorts; the earlier ten live in eliza. 
 | `PetRockShort` | The 1975 Pet Rock: 1.5 million rocks sold as pets: "The Perfect Pet", 62.0 s | `src/videos/petrock/` | `production-petrock/` | `out/petrock_final.mp4` |
 | `PenguinShort` | A penguin rescued from oil in Brazil (2011) keeps coming back to the man who saved him: "The Penguin Who Came Back", 30.7 s | `src/videos/penguin/` | `production-penguin/` | `out/penguin_final.mp4` |
 | `RoverShort` | Curiosity hummed Happy Birthday to itself on Mars once (2013); robot mowers sang it back (2022): "Happy Birthday, Alone", 31.5 s | `src/videos/rover/` | `production-rover/` | `out/rover_final.mp4` |
+| `HugsShort` | Sydney, 2004: a young man home alone holds a "Free Hugs" sign in a city mall; the city bans it, 10,000 sign to bring it back: "Free Hugs", 32.8 s | `src/videos/hugs/` | `production-hugs/` | `out/hugs_final.mp4` |
 
 All are 1080x1920 at 30 fps, registered in `src/Root.tsx`. The final render is 1440x2560 (`--scale 1.3333`).
 Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`, `monowi/`, `sweden/`, `minister/`, `chat/`, `rental/`, `eliza/`.
@@ -46,6 +47,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   COMP=PetRockShort ./render.sh final --props='{"logo":true}'
   COMP=PenguinShort ./render.sh final --props='{"logo":true}'
   COMP=RoverShort ./render.sh final --props='{"logo":true}'
+  COMP=HugsShort ./render.sh final --props='{"logo":true}'
   ./render.sh preview      # 720p quick check
   ./render.sh remux        # new audio only, no re-render (seconds)
   ```
@@ -146,3 +148,11 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
 - The `note` bubble icon is a paper note; the music note is `music`.
 - The rover's hum is the public-domain "Happy Birthday" first phrase, synthesized as thin beeps in make_audio.py.
 - Captions: "twenty thirteen" -> "2013", "two hundred" -> "200", "tenth" -> "10th".
+
+## Free Hugs-specific notes
+- The mall is an exterior set on the grass at (MX, MZ): paving quad, four shop boxes (CAFE/BOOKS/SHOES/MUSIC) with
+  painted front quads 12 cm proud of the box (`storeFront`), benches, lamps, planter trees. Sun `MALL` az 125 / el 45.
+- `fxHugSign(p, write, banned)` letters FREE/HUGS with a marker (insert, shot 2) and slams a red BANNED stamp (shot 7);
+  `fxCase` is the suitcase. Held, the sign is its own card in front of his chest (`hugger()` in cast.ts).
+- Never more than two passers-by on screen; they walk across one at a time (`walker()`).
+- Captions: "two thousand four" -> "2004", "Ten thousand" -> "10,000".
