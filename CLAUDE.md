@@ -10,6 +10,7 @@ tools and look) and holds only the newer shorts; the earlier ten live in eliza. 
 | `ThanksgivingShort` | A grandmother's Thanksgiving text reached a stranger (2016); ten Thanksgivings together: "Can I Still Get a Plate?", 61.3 s | `src/videos/thanksgiving/` | `production-thanksgiving/` | `out/thanksgiving_final.mp4` |
 | `PetRockShort` | The 1975 Pet Rock: 1.5 million rocks sold as pets: "The Perfect Pet", 62.0 s | `src/videos/petrock/` | `production-petrock/` | `out/petrock_final.mp4` |
 | `PenguinShort` | A penguin rescued from oil in Brazil (2011) keeps coming back to the man who saved him: "The Penguin Who Came Back", 30.7 s | `src/videos/penguin/` | `production-penguin/` | `out/penguin_final.mp4` |
+| `RoverShort` | Curiosity hummed Happy Birthday to itself on Mars once (2013); robot mowers sang it back (2022): "Happy Birthday, Alone", 31.5 s | `src/videos/rover/` | `production-rover/` | `out/rover_final.mp4` |
 
 All are 1080x1920 at 30 fps, registered in `src/Root.tsx`. The final render is 1440x2560 (`--scale 1.3333`).
 Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`, `monowi/`, `sweden/`, `minister/`, `chat/`, `rental/`, `eliza/`.
@@ -44,6 +45,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   ./render.sh final --props='{"logo":true}'   # COMP=ThanksgivingShort is the default
   COMP=PetRockShort ./render.sh final --props='{"logo":true}'
   COMP=PenguinShort ./render.sh final --props='{"logo":true}'
+  COMP=RoverShort ./render.sh final --props='{"logo":true}'
   ./render.sh preview      # 720p quick check
   ./render.sh remux        # new audio only, no re-render (seconds)
   ```
@@ -105,7 +107,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
 ## Making the next short
 1. Pick a surprising true story with a clear link to loneliness or companionship (offer 3-4 options; the user picks).
 2. Write `production-<name>/SCRIPT.md` and `voice/script.json`, and give the user the plain narration text for ElevenLabs.
-3. Copy the closest earlier short: `penguin/` (the newest, a ~30 s format: a Brazilian beach, an animal card `fxPenguin`), `petrock/` ( a 70s den, a bar, a beach, a gift shop; carrier/manual inserts), `thanksgiving/` (dining room, classroom, an Arizona street, a texting phone insert `fxChat`), or one from eliza, to `src/videos/<name>/`, rename the component and composition, and register it in `src/Root.tsx`. Add a `COMP` case to `render.sh`.
+3. Copy the closest earlier short: `rover/` (the newest, ~30 s: Mars with dust haze, mission control, a lawn; `fxRover`, `fxMower`), `penguin/` (~30 s: a Brazilian beach, an animal card `fxPenguin`), `petrock/` ( a 70s den, a bar, a beach, a gift shop; carrier/manual inserts), `thanksgiving/` (dining room, classroom, an Arizona street, a texting phone insert `fxChat`), or one from eliza, to `src/videos/<name>/`, rename the component and composition, and register it in `src/Root.tsx`. Add a `COMP` case to `render.sh`.
 4. Once the take arrives: align, set `SHOTS`/`CAMS` to the words, then cast, build, captions, audio, stills, push.
 
 ## Thanksgiving-specific notes
@@ -136,3 +138,11 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   stands it on the sand at 1.4x real size so it reads next to the man (real-size read too small).
 - Beach sun el >= 40-50: at el 30 the valley/palm shadows turned most of the sand violet.
 - Captions: "twenty eleven" -> "2011", "eleven" -> "11".
+
+## Rover-specific notes
+- Mars = the beach set recoloured: red ground quad, boulders, a ring of broken red cliffs ~65 m out, a far unlit blue
+  Earth sphere (fog off) high enough to clear the cliffs. Town trees are skipped inside the Mars box in build.ts.
+- `MARS_SHOTS` in world.ts sets a short dust fog (22 -> 115 m) so the green valley hills vanish behind the cliffs.
+- The `note` bubble icon is a paper note; the music note is `music`.
+- The rover's hum is the public-domain "Happy Birthday" first phrase, synthesized as thin beeps in make_audio.py.
+- Captions: "twenty thirteen" -> "2013", "two hundred" -> "200", "tenth" -> "10th".
