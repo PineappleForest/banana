@@ -12,6 +12,7 @@ tools and look) and holds only the newer shorts; the earlier ten live in eliza. 
 | `PenguinShort` | A penguin rescued from oil in Brazil (2011) keeps coming back to the man who saved him: "The Penguin Who Came Back", 30.7 s | `src/videos/penguin/` | `production-penguin/` | `out/penguin_final.mp4` |
 | `RoverShort` | Curiosity hummed Happy Birthday to itself on Mars once (2013); robot mowers sang it back (2022): "Happy Birthday, Alone", 31.5 s | `src/videos/rover/` | `production-rover/` | `out/rover_final.mp4` |
 | `HugsShort` | Sydney, 2004: a young man home alone holds a "Free Hugs" sign in a city mall; the city bans it, 10,000 sign to bring it back: "Free Hugs", 32.8 s | `src/videos/hugs/` | `production-hugs/` | `out/hugs_final.mp4` |
+| `TruceShort` | The 1914 Christmas Truce: candle trees, "Silent Night" sung across no-man's-land, handshakes and football; about 100,000 soldiers: "Silent Night", 32.2 s | `src/videos/truce/` | `production-truce/` | `out/truce_final.mp4` |
 
 All are 1080x1920 at 30 fps, registered in `src/Root.tsx`. The final render is 1440x2560 (`--scale 1.3333`).
 Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`, `monowi/`, `sweden/`, `minister/`, `chat/`, `rental/`, `eliza/`.
@@ -48,6 +49,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   COMP=PenguinShort ./render.sh final --props='{"logo":true}'
   COMP=RoverShort ./render.sh final --props='{"logo":true}'
   COMP=HugsShort ./render.sh final --props='{"logo":true}'
+  COMP=TruceShort ./render.sh final --props='{"logo":true}'
   ./render.sh preview      # 720p quick check
   ./render.sh remux        # new audio only, no re-render (seconds)
   ```
@@ -156,3 +158,16 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   `fxCase` is the suitcase. Held, the sign is its own card in front of his chest (`hugger()` in cast.ts).
 - Never more than two passers-by on screen; they walk across one at a time (`walker()`).
 - Captions: "two thousand four" -> "2004", "Ten thousand" -> "10,000".
+
+## Silent Night (Christmas Truce)-specific notes
+- The battlefield is built on the grass at (MX, MZ) but TURNED 180 deg: `E`/`W` are `[MX - x, D0 + y, MZ - z]` in
+  story.ts, cast.ts and build.ts, so the German line (local z = 16) faces open country. A cut-out wood quad
+  (`treeline`, local z = -34) and `FIELD_SHOTS` mist in world.ts (night 12 -> 62 m, day 18 -> 95 m) hide the river town.
+- Trenches are sandbag walls (box + textured face quad facing the open side) 1.22 m high: soldiers stand on the floor,
+  so only head and shoulders show. No-man's-land: flat crater discs, 12 cm stakes, a stump. No wire (thin geometry).
+- Candle trees are cards: `fxXTree(lit)` plus `fxFlames(lit)` on a second card 3 cm toward the lens with glow 2.4 (only
+  the flames bloom). The flat's little tree is a 3D cone with an `fxFlames` card.
+- Morning shots use the "day" light (cold frost); "golden" turned the frost into orange sand.
+- The handshake is `prop: ["hold", 1]` on both, the right-hand one `mirror: true`.
+- Score: "Silent Night" (public domain) first half on fife from the far trench, the answer on a soft horn.
+- Captions: "nineteen fourteen" -> "1914", "a hundred thousand" -> "100,000".
