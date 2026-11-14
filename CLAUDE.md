@@ -8,6 +8,7 @@ tools and look) and holds only the newer shorts; the earlier ten live in eliza. 
 | Composition | Story | Code | Production files | Output |
 |---|---|---|---|---|
 | `ThanksgivingShort` | A grandmother's Thanksgiving text reached a stranger (2016); ten Thanksgivings together: "Can I Still Get a Plate?", 61.3 s | `src/videos/thanksgiving/` | `production-thanksgiving/` | `out/thanksgiving_final.mp4` |
+| `PetRockShort` | The 1975 Pet Rock: 1.5 million rocks sold as pets: "The Perfect Pet", 62.0 s | `src/videos/petrock/` | `production-petrock/` | `out/petrock_final.mp4` |
 
 All are 1080x1920 at 30 fps, registered in `src/Root.tsx`. The final render is 1440x2560 (`--scale 1.3333`).
 Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`, `monowi/`, `sweden/`, `minister/`, `chat/`, `rental/`, `eliza/`.
@@ -40,6 +41,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   ```
   git pull
   ./render.sh final --props='{"logo":true}'   # COMP=ThanksgivingShort is the default
+  COMP=PetRockShort ./render.sh final --props='{"logo":true}'
   ./render.sh preview      # 720p quick check
   ./render.sh remux        # new audio only, no re-render (seconds)
   ```
@@ -101,7 +103,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
 ## Making the next short
 1. Pick a surprising true story with a clear link to loneliness or companionship (offer 3-4 options; the user picks).
 2. Write `production-<name>/SCRIPT.md` and `voice/script.json`, and give the user the plain narration text for ElevenLabs.
-3. Copy the closest earlier short: `thanksgiving/` (the newest: dining room, classroom, an Arizona street, a texting phone insert `fxChat`), or one from eliza, to `src/videos/<name>/`, rename the component and composition, and register it in `src/Root.tsx`. Add a `COMP` case to `render.sh`.
+3. Copy the closest earlier short: `petrock/` (the newest: a 70s den, a bar, a beach, a gift shop; carrier/manual inserts), `thanksgiving/` (dining room, classroom, an Arizona street, a texting phone insert `fxChat`), or one from eliza, to `src/videos/<name>/`, rename the component and composition, and register it in `src/Root.tsx`. Add a `COMP` case to `render.sh`.
 4. Once the take arrives: align, set `SHOTS`/`CAMS` to the words, then cast, build, captions, audio, stills, push.
 
 ## Thanksgiving-specific notes
@@ -115,3 +117,13 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
 - The sand quad is limited to z <= MZ + 60 so it never covers the river town.
 - Captions: spoken "twenty sixteen", "seventeen-year-old", "Ten" become "2016", "17-year-old", "10" via
   `voice/words_captions.json` + `voice/phrases_captions.json`; `tools/caption_pages.py` keeps hyphenated tokens whole.
+
+## Pet Rock-specific notes
+- Den and bar have NO windows (flicker lesson). Rooms have no ceiling: in a wide interior keep the frame top below the
+  wall height (the first bar wide showed sky; fov 44 at 3.7 m, look y ~1.1 fixed it).
+- Inserts (carrier `fxCarrier`, manual `fxManual`) are `front` cards at the lens look point via `ins()`; keep them
+  ~0.19-0.2 m wide at 0.45 m or they crop.
+- Captions: "nineteen seventy-five" -> "1975", "three ninety-five" -> "$3.95"; `tools/caption_pages.py` keeps "$3.95"
+  whole (the joiner class includes ".").
+- Shop front quad sits 12 cm in front of its box (no z-fight); THE rock is a 3D squashed sphere on the den cushion and
+  on the flat's side table; the bubble/manual rock is `fxRockAt`.
