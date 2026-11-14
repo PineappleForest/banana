@@ -2,6 +2,7 @@
 # One-command render of the Feeloy short on a GPU box (RunPod etc.).
 #   COMP=ThanksgivingShort (default) -> out/thanksgiving_final.mp4  ("Can I Still Get a Plate?", the wrong-number Thanksgiving text)
 #   COMP=PetRockShort               -> out/petrock_final.mp4       ("The Perfect Pet", the 1975 Pet Rock)
+#   COMP=PenguinShort               -> out/penguin_final.mp4       ("The Penguin Who Came Back", ~30 s)
 #   ./render.sh            -> out/thanksgiving_final.mp4  (1440x2560, 30 fps, h264 crf 16, soundtrack muxed)
 #   ./render.sh final --props='{"logo":true}'   extra options after the mode go to the renderer
 #                             (logo: put your logo at public/eliza/logo.png; captions:false = no subtitles)
@@ -16,7 +17,8 @@ COMP="${COMP:-ThanksgivingShort}"
 case "$COMP" in
   ThanksgivingShort) MIX=production-thanksgiving/audio/mix.wav; VID=out/thanksgiving_video.mp4; FIN=out/thanksgiving_final.mp4; PRE=out/thanksgiving_preview.mp4 ;;
   PetRockShort) MIX=production-petrock/audio/mix.wav; VID=out/petrock_video.mp4; FIN=out/petrock_final.mp4; PRE=out/petrock_preview.mp4 ;;
-  *) echo "unknown COMP=$COMP (ThanksgivingShort | PetRockShort)"; exit 1 ;;
+  PenguinShort) MIX=production-penguin/audio/mix.wav; VID=out/penguin_video.mp4; FIN=out/penguin_final.mp4; PRE=out/penguin_preview.mp4 ;;
+  *) echo "unknown COMP=$COMP (ThanksgivingShort | PetRockShort | PenguinShort)"; exit 1 ;;
 esac
 case "$MODE" in final|preview|remux) shift || true ;; *) MODE=final ;; esac
 EXTRA=("$@")

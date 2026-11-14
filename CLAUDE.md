@@ -9,6 +9,7 @@ tools and look) and holds only the newer shorts; the earlier ten live in eliza. 
 |---|---|---|---|---|
 | `ThanksgivingShort` | A grandmother's Thanksgiving text reached a stranger (2016); ten Thanksgivings together: "Can I Still Get a Plate?", 61.3 s | `src/videos/thanksgiving/` | `production-thanksgiving/` | `out/thanksgiving_final.mp4` |
 | `PetRockShort` | The 1975 Pet Rock: 1.5 million rocks sold as pets: "The Perfect Pet", 62.0 s | `src/videos/petrock/` | `production-petrock/` | `out/petrock_final.mp4` |
+| `PenguinShort` | A penguin rescued from oil in Brazil (2011) keeps coming back to the man who saved him: "The Penguin Who Came Back", 30.7 s | `src/videos/penguin/` | `production-penguin/` | `out/penguin_final.mp4` |
 
 All are 1080x1920 at 30 fps, registered in `src/Root.tsx`. The final render is 1440x2560 (`--scale 1.3333`).
 Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`, `monowi/`, `sweden/`, `minister/`, `chat/`, `rental/`, `eliza/`.
@@ -42,6 +43,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   git pull
   ./render.sh final --props='{"logo":true}'   # COMP=ThanksgivingShort is the default
   COMP=PetRockShort ./render.sh final --props='{"logo":true}'
+  COMP=PenguinShort ./render.sh final --props='{"logo":true}'
   ./render.sh preview      # 720p quick check
   ./render.sh remux        # new audio only, no re-render (seconds)
   ```
@@ -103,7 +105,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
 ## Making the next short
 1. Pick a surprising true story with a clear link to loneliness or companionship (offer 3-4 options; the user picks).
 2. Write `production-<name>/SCRIPT.md` and `voice/script.json`, and give the user the plain narration text for ElevenLabs.
-3. Copy the closest earlier short: `petrock/` (the newest: a 70s den, a bar, a beach, a gift shop; carrier/manual inserts), `thanksgiving/` (dining room, classroom, an Arizona street, a texting phone insert `fxChat`), or one from eliza, to `src/videos/<name>/`, rename the component and composition, and register it in `src/Root.tsx`. Add a `COMP` case to `render.sh`.
+3. Copy the closest earlier short: `penguin/` (the newest, a ~30 s format: a Brazilian beach, an animal card `fxPenguin`), `petrock/` ( a 70s den, a bar, a beach, a gift shop; carrier/manual inserts), `thanksgiving/` (dining room, classroom, an Arizona street, a texting phone insert `fxChat`), or one from eliza, to `src/videos/<name>/`, rename the component and composition, and register it in `src/Root.tsx`. Add a `COMP` case to `render.sh`.
 4. Once the take arrives: align, set `SHOTS`/`CAMS` to the words, then cast, build, captions, audio, stills, push.
 
 ## Thanksgiving-specific notes
@@ -127,3 +129,10 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   whole (the joiner class includes ".").
 - Shop front quad sits 12 cm in front of its box (no z-fight); THE rock is a 3D squashed sphere on the den cushion and
   on the flat's side table; the bubble/manual rock is `fxRockAt`.
+
+## Penguin-specific notes (the ~30 s format)
+- ~83 words -> 30 s with Mark at the usual pace; 9 shots, one beat per sentence.
+- The animal is an fx card (`fxPenguin`: stand / walk / peck / lie / happy, `oil` smears, blink); `peng()` in cast.ts
+  stands it on the sand at 1.4x real size so it reads next to the man (real-size read too small).
+- Beach sun el >= 40-50: at el 30 the valley/palm shadows turned most of the sand violet.
+- Captions: "twenty eleven" -> "2011", "eleven" -> "11".
