@@ -43,7 +43,7 @@ const INSIDE = { az: 150, el: 48 }; // interiors: sun over the lens' shoulder, s
 const OUT = { az: 140, el: 42 }; // the village: high sun over the lens' shoulder
 const GOLD = { az: 125, el: 30 }; // the Arizona street: low warm sun over the lens' shoulder, faces still lit
 const SUN_SHOT: Record<number, { az?: number; el?: number }> = { 1: INSIDE, 2: INSIDE, 3: INSIDE, 4: INSIDE, 5: INSIDE, 6: INSIDE, 7: INSIDE, 8: INSIDE,
-  9: GOLD, 10: GOLD, 11: { az: 140, el: 22 }, 12: INSIDE, 13: { az: 115, el: 22 }, 14: { az: 140, el: 30 } };
+  9: GOLD, 10: GOLD, 11: { az: 140, el: 22 }, 12: INSIDE, 13: { az: 115, el: 22 }, 15: GOLD, 14: { az: 140, el: 30 } };
 /** every lens position of the film looking at its subject (houses, trees and booths in the way are left out) */
 const sightLines = (): Ray[] => {
   const out: Ray[] = [];

@@ -124,8 +124,8 @@ def flip(t, g=0.25): put(sfx, bp(colored(ns(0.12), R, 0.3), 1500, 6000) * np.han
 def tick(t0, t1, g=0.12):
     k = 0
     while t0 + k < t1: put(sfx, G.clink(R, 2400, 0.03, 0.3), t0 + k, g, 0.4); k += 1
-room(0, F(345), 0.09)
-popb(F(110), 0.35); whoosh(F(196), 0.5, 0.6); cue(F(110), "sfx: pop on the stranger's ?; flash whoosh")
+outside(0, F(110), 0.25); sent(F(84), 0.4); room(F(110), F(345), 0.09)
+popb(F(112), 0.35); whoosh(F(196), 0.5, 0.6); cue(0.0, "sfx: outside at the door; invite sent at 84; inside from 110: pop on the ?; flash whoosh")
 for k in range(10): put(sfx, G.clink(R, 2600, 0.02, 0.5), F(200) + k * 0.17, 0.1, -0.2)
 sent(F(209), 0.4); cue(F(200), "sfx: typing taps; message sent")
 put(sfx, lp(np.sign(np.sin(2 * np.pi * 130 * tt(0.3))) * 0.4, 1600) * np.hanning(ns(0.3)), F(306), 0.2); cue(F(306), "sfx: error buzz on GRANDSON")

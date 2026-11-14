@@ -764,7 +764,7 @@ const room = (wb: Batch, rm: Room, o: RoomOpt) => {
     wb.add(quad(P(-hw, 0, zb + 0.005), P(hw, 0, zb + 0.005), P(hw, 1.0, zb + 0.005), P(-hw, 1.0, zb + 0.005)), o.wains);
     wb.add(quad(P(-hw + 0.005, 0, zf), P(-hw + 0.005, 0, zb), P(-hw + 0.005, 1.0, zb), P(-hw + 0.005, 1.0, zf)), o.wains);
     wb.add(quad(P(hw - 0.005, 0, zb), P(hw - 0.005, 0, zf), P(hw - 0.005, 1.0, zf), P(hw - 0.005, 1.0, zb)), o.wains); }
-  if (o.win) { const x = o.winX ?? 0; wb.add(quad(P(x - 1.1, 1.0, zb + 0.02), P(x + 1.1, 1.0, zb + 0.02), P(x + 1.1, 2.5, zb + 0.02), P(x - 1.1, 2.5, zb + 0.02)), o.win); }
+  if (o.win) { const x = o.winX ?? 0; wb.add(quad(P(x - 1.1, 1.0, zb + 0.06), P(x + 1.1, 1.0, zb + 0.06), P(x + 1.1, 2.5, zb + 0.06), P(x - 1.1, 2.5, zb + 0.06)), o.win); }
 };
 const tableRound = (fb: Batch, rm: Room, x: number, z: number, r: number) => {
   const cloth = col("cloth", "#f7f3ea");
@@ -967,16 +967,16 @@ export const buildRooms = (root: THREE.Object3D) => {
   for (const [x, z] of [[-0.85, -1.2], [-0.3, -1.15], [0.3, -1.15], [0.85, -1.2], [-0.3, -1.85], [0.3, -1.85]]) fb.add(cyl(0.11, 0.1, 0.015, 20), col("plateWhite", "#fbf8f0"), at(...R("dining", x, 0.77, z)));
   for (const x of [-0.6, 0.0, 0.6]) chair(fb, "dining", x, -2.45, -1);
   fb.add(boxGeo(P(-3.2, 0, -2.95), P(-2.0, 0.9, -2.5)), col("sideboard", "#7a5236"));
-  fb.add(quad(P(-3.0, 1.45, -2.98), P(-2.5, 1.45, -2.98), P(-2.5, 2.05, -2.98), P(-3.0, 2.05, -2.98)), lam("artD1", () => ({ map: frameArt("d1", "#f2c94c", "#d8433e") })));
-  fb.add(quad(P(2.2, 1.45, -2.98), P(2.75, 1.45, -2.98), P(2.75, 2.1, -2.98), P(2.2, 2.1, -2.98)), lam("artD2", () => ({ map: frameArt("d2", "#5a8fc2", "#6aab4f") })));
+  fb.add(quad(P(-3.0, 1.45, -2.94), P(-2.5, 1.45, -2.94), P(-2.5, 2.05, -2.94), P(-3.0, 2.05, -2.94)), lam("artD1", () => ({ map: frameArt("d1", "#f2c94c", "#d8433e") })));
+  fb.add(quad(P(2.2, 1.45, -2.94), P(2.75, 1.45, -2.94), P(2.75, 2.1, -2.94), P(2.2, 2.1, -2.94)), lam("artD2", () => ({ map: frameArt("d2", "#5a8fc2", "#6aab4f") })));
   // ---- the classroom: chalkboard on the back wall, a front wall with windows behind the students, rows of desks ----
   room(wb, "klass", { w: 8, d: 7, h: 3.0, wall: lam("plKlass", () => ({ map: plaster("klass", "#d9e2c6") })), floor: lam("tlKlass", () => ({ map: tiles() })),
     wains: lam("wnKlass", () => ({ color: "#5a8fc2" })) });
   const K = (x: number, y: number, z: number) => V(...R("klass", x, y, z));
-  fb.add(quad(K(-2.4, 0.95, -3.48), K(1.6, 0.95, -3.48), K(1.6, 2.45, -3.48), K(-2.4, 2.45, -3.48)), lam("board", () => ({ map: chalkboard() })));
-  fb.add(quad(K(2.4, 1.9, -3.48), K(2.9, 1.9, -3.48), K(2.9, 2.4, -3.48), K(2.4, 2.4, -3.48)), lam("clockK", () => ({ map: wallClock(10) })));
+  fb.add(quad(K(-2.4, 0.95, -3.44), K(1.6, 0.95, -3.44), K(1.6, 2.45, -3.44), K(-2.4, 2.45, -3.44)), lam("board", () => ({ map: chalkboard() })));
+  fb.add(quad(K(2.4, 1.9, -3.44), K(2.9, 1.9, -3.44), K(2.9, 2.4, -3.44), K(2.4, 2.4, -3.44)), lam("clockK", () => ({ map: wallClock(10) })));
   wb.add(boxGeo(K(-4.2, 0, 3.0), K(4.2, 3.0, 3.2)), lam("plKlass", () => ({ map: plaster("klass", "#d9e2c6") })));
-  for (const x of [-2.2, 0.4, 3.0]) fb.add(quad(K(x + 0.9, 1.0, 2.98), K(x - 0.9, 1.0, 2.98), K(x - 0.9, 2.4, 2.98), K(x + 0.9, 2.4, 2.98)),
+  for (const x of [-2.2, 0.4, 3.0]) fb.add(quad(K(x + 0.9, 1.0, 2.94), K(x - 0.9, 1.0, 2.94), K(x - 0.9, 2.4, 2.94), K(x + 0.9, 2.4, 2.94)),
     new THREE.MeshBasicMaterial({ map: windowView("klass", ["#7fb2e6", "#cfe3f5"], "#9fb87a"), color: new THREE.Color(0.95, 0.95, 0.95) }));
   for (const [x, z] of [[-2.2, -0.3], [-1.0, -0.3], [1.5, -0.3], [-2.2, 1.6], [-1.0, 1.6], [0.25, 1.6], [1.5, 1.6]]) { deskAt(fb, "klass", x - 0.4, x + 0.4, z - 0.25, z + 0.15, "#c9a06a", "#a8784a"); chair(fb, "klass", x, z + 0.55, 1); }
   deskAt(fb, "klass", -0.15, 0.65, -0.55, -0.15, "#c9a06a", "#a8784a"); chair(fb, "klass", 0.32, 0.4, 1); // the teen's desk
@@ -989,7 +989,7 @@ export const buildRooms = (root: THREE.Object3D) => {
   fb.add(boxGeo(Q(-0.9, 0.42, -2.3), Q(0.1, 1.15, -2.1)), cloth);
   for (const x of [-0.98, 0.02]) fb.add(boxGeo(Q(x, 0, -2.15), Q(x + 0.16, 0.66, -1.3)), cloth);
   fb.add(boxGeo(Q(0.4, 0, -2.2), Q(0.85, 0.6, -1.75)), col("sideTable", "#8a5a34"));
-  fb.add(quad(Q(-1.75, 1.6, -2.47), Q(-1.25, 1.6, -2.47), Q(-1.25, 2.1, -2.47), Q(-1.75, 2.1, -2.47)), lam("clock2", () => ({ map: wallClock(2) })));
+  fb.add(quad(Q(-1.75, 1.6, -2.44), Q(-1.25, 1.6, -2.44), Q(-1.25, 2.1, -2.44), Q(-1.75, 2.1, -2.44)), lam("clock2", () => ({ map: wallClock(2) })));
   // ---- the Arizona street: sand over the grass, grandma's stucco house with a flat roof and a tile band, a porch
   //      beam, a path, gravel yard, saguaros, a mailbox, red mesas far behind ----
   const W = (x: number, y: number, z: number) => V(MX + x, D0 + y, MZ + z);

@@ -278,8 +278,15 @@ const teenDesk = (cam: CamInfo, t: number, out: Stage, a: Partial<Act> = {}) =>
 // 1: the table is set; a stranger is invited; by accident
 const shot1 = (cam: CamInfo, t: number, out: Stage) => {
   const f = F(t);
-  grandmaStand(cam, t, out, { expr: f >= 163 ? "shock" : f >= 40 ? "grin" : "smile", wave: f >= 40 && f < 100 ? wob(t, 2.0) : undefined, swaps: [163 / FPS] });
-  bubble(out, "ask", pop(f, 110), Dn(0.6, 1.55, -2.4), 0.36);
+  grandmaStand(cam, t, out, { expr: f >= 162 ? "shock" : "grin", swaps: [162 / FPS] });
+  bubble(out, "ask", pop(f, 112), Dn(-0.6, 1.5, -2.35), 0.32);
+};
+// 15 (opening): grandma at her Arizona door waves, then taps her phone and the invite flies off
+const shot15 = (cam: CamInfo, t: number, out: Stage) => {
+  const f = F(t);
+  put(cam, t, out, { o: GRANDMA, i: 11, at: E(-0.45, 0, 0.8), expr: "grin", wave: f >= 12 && f < 64 ? wob(t, 2.0) : undefined,
+    prop: f >= 72 ? ["type", q((f % 10) / 10, 10)] : null, headTilt: f >= 72 ? 5 : 0 });
+  if (f >= 84) { const k = clamp01((f - 84) / 26); bubble(out, "mail", pop(f, 82), E(-0.1 + 1.4 * smooth(k), 2.05 + 0.6 * k, 0.9), 0.42); }
 };
 // 2: she texts her grandson; then the phone: GRANDSON gets crossed out (he changed his number)
 const shot2 = (cam: CamInfo, t: number, out: Stage) => {
@@ -408,7 +415,7 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
   LNAME = s.light;
   findSun(cam, SUN);
   if (cam.quat) { const fw = new THREE.Vector3(0, 0, -1).applyQuaternion(cam.quat); camLook = [cam.pos.x + fw.x * 0.45, cam.pos.y + fw.y * 0.45, cam.pos.z + fw.z * 0.45]; }
-  const SH = [shot1, shot2, shot3, shot4, shot5, shot6, shot7, shot8, shot9, shot10, shot11, shot12, shot13, shot14];
+  const SH = [shot1, shot2, shot3, shot4, shot5, shot6, shot7, shot8, shot9, shot10, shot11, shot12, shot13, shot14, shot15];
   SH[id - 1]?.(cam, t, out);
   return out;
 };

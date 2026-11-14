@@ -1,11 +1,11 @@
 # Cues (seconds)
 
-integrated -15.14 LUFS, true peak -1.76 dBTP, length 61.333 s
+integrated -15.12 LUFS, true peak -1.77 dBTP, length 61.333 s
 
 Mix: voice unchanged; music base voice-15 LU then +3 dB, ducked -3 dB under words; SFX base voice-12 LU then -6 dB.
 
 -   0.00  music: warm G folk pluck groove + glock tune
--   3.67  sfx: pop on the stranger's ?; flash whoosh
+-   0.00  sfx: outside at the door; invite sent at 84; inside from 110: pop on the ?; flash whoosh
 -   5.43  music: uh-oh tuba on BY ACCIDENT
 -   6.67  sfx: typing taps; message sent
 -  10.20  music: sad tuba fall (changed number)

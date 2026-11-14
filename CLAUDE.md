@@ -109,6 +109,9 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   texts and selfie photos; keep at most ~4 messages on screen (older ones are dropped per insert).
 - Low golden sun behind the camera throws saguaro shadows across the house front: keep exterior sun el >= 25 and props
   that cast long shadows off the lens-to-house line.
+- Wall decals (windows, pictures, boards, clocks) sit 6 cm off their wall. At 2 cm the dining window z-fought with the
+  wall on the pod GPU in a ~5 m wide shot and flickered white over half the frame. Keep big bright window walls out of
+  wide shots anyway. Shot 15 is the exterior opening (frames 0-110); `SHOTS[id - 1]` indexing means it stays last in SHOTS.
 - The sand quad is limited to z <= MZ + 60 so it never covers the river town.
 - Captions: spoken "twenty sixteen", "seventeen-year-old", "Ten" become "2016", "17-year-old", "10" via
   `voice/words_captions.json` + `voice/phrases_captions.json`; `tools/caption_pages.py` keeps hyphenated tokens whole.

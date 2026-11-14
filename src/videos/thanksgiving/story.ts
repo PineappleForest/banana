@@ -23,7 +23,7 @@ export const MX = 60, MZ = -170;
 export type Light = "day" | "golden" | "night";
 export type ShotDef = { id: number; a: number; b: number; light: Light; sunAz?: number; sunEl?: number };
 export const SHOTS: ShotDef[] = [
-  { id: 1, a: 0, b: 196, light: "day" },        // hook: a stranger invited to Thanksgiving. By accident.
+  { id: 1, a: 110, b: 196, light: "day" },      // inside: a stranger invited to Thanksgiving. By accident. (side-on, no window)
   { id: 2, a: 196, b: 345, light: "day" },      // she texts her grandson; he changed his number (phone insert at 280)
   { id: 3, a: 345, b: 470, light: "day" },      // the classroom: the text lands on a 17-year-old
   { id: 4, a: 470, b: 573, light: "day" },      // phone insert: "Who is this?" "Grandma."
@@ -37,6 +37,7 @@ export const SHOTS: ShotDef[] = [
   { id: 12, a: 1330, b: 1418, light: "day" },   // ten Thanksgivings later
   { id: 13, a: 1418, b: 1556, light: "golden" },// one text, the wrong person answered
   { id: 14, a: 1556, b: TOTAL, light: "night" },// a lonely flat; Jenny -> end card
+  { id: 15, a: 0, b: 110, light: "golden" },     // opening: grandma at her Arizona door, the text flies off (SHOTS[id - 1] indexing: keep last)
 ];
 export const XFADE: Record<number, number> = { 9: 8, 11: 10, 12: 8, 13: 8, 14: 10 };
 export const FLASH_AT = 196;
@@ -94,7 +95,9 @@ const ins = (pos: V3, target: V3, f: number, f0: number): Shot => {
 };
 const pull = (f: number, f0: number, rate: number) => 1 + rate * Math.max(0, f - f0);
 // dining room
-const S1a = (f: number) => dolly(Dn(-1.0, 1.6, 2.2), Dn(-0.85, 1.05, -1.6), pushK(f, 0, 0.0016, 0.006, 30), { fov: 52, roll: 0.02 });
+// 1: side-on toward the -x wall (no window in frame: the window wall flickered on the pod GPU in the old wide)
+const S1a = (f: number) => dolly(Dn(1.5, 1.6, 0.6), Dn(-1.05, 1.05, -1.85), pushK(f, 106, 0.0012), { fov: 50, roll: 0.02 });
+const S15a = (f: number) => dolly(E(1.6, 1.7, 9.5), E(-0.2, 1.55, 0.8), pushK(f, 0, 0.0028), { fov: 48, roll: -0.015 });
 const S2a = (f: number) => dolly(Dn(-0.5, 1.5, 1.0), Dn(-1.25, 1.3, -1.5), pushK(f, 192, 0.0018), { fov: 42, roll: -0.02 });
 const S2b = (f: number) => ins(Dn(-0.6, 1.45, 0.6), Dn(-1.3, 1.1, -1.5), f, 280);
 const S8a = (f: number) => dolly(Dn(-0.4, 1.55, 1.2), Dn(-1.2, 1.25, -1.5), pushK(f, 871, 0.0016, 0.006, 30), { fov: 44, roll: 0.02 });
@@ -121,10 +124,10 @@ const S14a = (f: number) => dolly(R("homeN", 0.9, 1.5, 2.4), R("homeN", -0.2, 1.
 const S14b = (f: number) => dolly(R("homeN", -0.38, 1.1, -0.45), R("homeN", -0.42, 1.02, -0.95), pushK(f, 1652, 0.0008), { fov: 40 });
 
 const CAMS: Record<number, Key[]> = {
-  1: [{ f: 0, s: S1a }], 2: [{ f: 192, s: S2a }, { f: 280, cut: true, s: S2b }], 3: [{ f: 341, s: S3a }], 4: [{ f: 466, s: S4a }],
+  1: [{ f: 106, s: S1a }], 2: [{ f: 192, s: S2a }, { f: 280, cut: true, s: S2b }], 3: [{ f: 341, s: S3a }], 4: [{ f: 466, s: S4a }],
   5: [{ f: 569, s: S5a }, { f: 612, cut: true, s: S5b }], 6: [{ f: 646, s: S6a }], 7: [{ f: 716, s: S7a }, { f: 828, cut: true, s: S7b }], 8: [{ f: 871, s: S8a }, { f: 955, cut: true, s: S8b }],
   9: [{ f: 999, s: S9a }, { f: 1092, cut: true, s: S9b }], 10: [{ f: 1131, s: S10a }], 11: [{ f: 1236, s: S11a }], 12: [{ f: 1326, s: S12a }],
-  13: [{ f: 1414, s: S13a }], 14: [{ f: 1552, s: S14a }, { f: 1652, cut: true, s: S14b }],
+  13: [{ f: 1414, s: S13a }], 14: [{ f: 1552, s: S14a }, { f: 1652, cut: true, s: S14b }], 15: [{ f: 0, s: S15a }],
 };
 
 // impact kicks: by accident, the text lands, NOT grandma, feed everyone, no parking
@@ -149,7 +152,7 @@ export const camAt = (id: number, f: number): Cam => {
 // ---------------- lens: depth of field ----------------
 export type Dof = { f: number; dur?: number; cInf: number; focus?: (f: number) => V3 };
 export const DOF: Dof[] = [
-  { f: 0, cInf: 10 }, { f: 196, cInf: 13 }, { f: 345, cInf: 7 }, { f: 470, cInf: 16 }, { f: 573, cInf: 13 }, { f: 612, cInf: 16 }, { f: 650, cInf: 14 },
+  { f: 0, cInf: 6 }, { f: 110, cInf: 11 }, { f: 196, cInf: 13 }, { f: 345, cInf: 7 }, { f: 470, cInf: 16 }, { f: 573, cInf: 13 }, { f: 612, cInf: 16 }, { f: 650, cInf: 14 },
   { f: 720, cInf: 13 }, { f: 828, cInf: 16 }, { f: 875, cInf: 12 }, { f: 955, cInf: 9 }, { f: 1003, cInf: 5 }, { f: 1135, cInf: 10 }, { f: 1240, cInf: 11 },
   { f: 1330, cInf: 9 }, { f: 1418, cInf: 0 }, { f: 1556, cInf: 9 }, { f: 1652, cInf: 16 },
 ];
