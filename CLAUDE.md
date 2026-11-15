@@ -13,6 +13,7 @@ tools and look) and holds only the newer shorts; the earlier ten live in eliza. 
 | `RoverShort` | Curiosity hummed Happy Birthday to itself on Mars once (2013); robot mowers sang it back (2022): "Happy Birthday, Alone", 31.5 s | `src/videos/rover/` | `production-rover/` | `out/rover_final.mp4` |
 | `HugsShort` | Sydney, 2004: a young man home alone holds a "Free Hugs" sign in a city mall; the city bans it, 10,000 sign to bring it back: "Free Hugs", 32.8 s | `src/videos/hugs/` | `production-hugs/` | `out/hugs_final.mp4` |
 | `TruceShort` | The 1914 Christmas Truce: candle trees, "Silent Night" sung across no-man's-land, handshakes and football; about 100,000 soldiers: "Silent Night", 32.2 s | `src/videos/truce/` | `production-truce/` | `out/truce_final.mp4` |
+| `DolphinShort` | A wild dolphin swam into a tiny Irish harbour in 1983 and stayed 37 years; in lockdown a boatman rowed out to keep him company: "The Dolphin Who Stayed", 31.7 s | `src/videos/dolphin/` | `production-dolphin/` | `out/dolphin_final.mp4` |
 
 All are 1080x1920 at 30 fps, registered in `src/Root.tsx`. The final render is 1440x2560 (`--scale 1.3333`).
 Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`, `monowi/`, `sweden/`, `minister/`, `chat/`, `rental/`, `eliza/`.
@@ -50,6 +51,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   COMP=RoverShort ./render.sh final --props='{"logo":true}'
   COMP=HugsShort ./render.sh final --props='{"logo":true}'
   COMP=TruceShort ./render.sh final --props='{"logo":true}'
+  COMP=DolphinShort ./render.sh final --props='{"logo":true}'
   ./render.sh preview      # 720p quick check
   ./render.sh remux        # new audio only, no re-render (seconds)
   ```
@@ -171,3 +173,15 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
 - The handshake is `prop: ["hold", 1]` on both, the right-hand one `mirror: true`.
 - Score: "Silent Night" (public domain) first half on fife from the far trench, the answer on a soft horn.
 - Captions: "nineteen fourteen" -> "1914", "a hundred thousand" -> "100,000".
+
+## Dolphin-specific notes
+- The harbour is the river town itself: water at y = 0 between the 6 m quay walls, staged around world x = HX (40).
+  `E(x, y, z)` in story/cast is `[HX + x, y, z]` (water level), `Q()` is on the quay deck. From these lenses (looking
+  +z) **+x is screen-LEFT**: cards drawn facing right must travel toward -x (`left = x1 > x0` in `swim`/`leap`).
+- The dolphin is a billboard card (`fxDolphin`, 600 x 300, 2.2 m) standing in the water: the water surface hides
+  whatever is below y = 0, so breaching arcs are just the card moving up and down (`swim`), leaps follow an arc with
+  the nose along the slope (`leap`), `fxSplash2` / flat `fxRipple` cards at the water line.
+- Boats are cards too (`fxBoat`: fish / tour / row, waterline at 0.786 of the card height), pushed 18 cm toward the
+  lens so the hull hides the legs of whoever stands in it. The rowing boatman sits at y -0.2 so he sits IN the boat.
+- Score: an original jig in D on fife, plucked chords and a frame-drum snare; a slow music-box reprise for the boatman.
+- Captions: "nineteen eighty-three" -> "1983", "thirty-seven" -> "37".
