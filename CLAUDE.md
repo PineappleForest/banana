@@ -14,6 +14,7 @@ tools and look) and holds only the newer shorts; the earlier ten live in eliza. 
 | `HugsShort` | Sydney, 2004: a young man home alone holds a "Free Hugs" sign in a city mall; the city bans it, 10,000 sign to bring it back: "Free Hugs", 32.8 s | `src/videos/hugs/` | `production-hugs/` | `out/hugs_final.mp4` |
 | `TruceShort` | The 1914 Christmas Truce: candle trees, "Silent Night" sung across no-man's-land, handshakes and football; about 100,000 soldiers: "Silent Night", 32.2 s | `src/videos/truce/` | `production-truce/` | `out/truce_final.mp4` |
 | `DolphinShort` | A wild dolphin swam into a tiny Irish harbour in 1983 and stayed 37 years; in lockdown a boatman rowed out to keep him company: "The Dolphin Who Stayed", 31.7 s | `src/videos/dolphin/` | `production-dolphin/` | `out/dolphin_final.mp4` |
+| `CometShort` | Philae bounced into a dark crack on a comet (2014), woke once for 85 s, was found two years later, and its mothership Rosetta came down to join it (2016): "Alone in the Dark", 29.6 s | `src/videos/comet/` | `production-comet/` | `out/comet_final.mp4` |
 
 All are 1080x1920 at 30 fps, registered in `src/Root.tsx`. The final render is 1440x2560 (`--scale 1.3333`).
 Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`, `monowi/`, `sweden/`, `minister/`, `chat/`, `rental/`, `eliza/`.
@@ -52,6 +53,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   COMP=HugsShort ./render.sh final --props='{"logo":true}'
   COMP=TruceShort ./render.sh final --props='{"logo":true}'
   COMP=DolphinShort ./render.sh final --props='{"logo":true}'
+  COMP=CometShort ./render.sh final --props='{"logo":true}'
   ./render.sh preview      # 720p quick check
   ./render.sh remux        # new audio only, no re-render (seconds)
   ```
@@ -117,7 +119,7 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
 ## Making the next short
 1. Pick a surprising true story with a clear link to loneliness or companionship (offer 3-4 options; the user picks).
 2. Write `production-<name>/SCRIPT.md` and `voice/script.json`, and give the user the plain narration text for ElevenLabs.
-3. Copy the closest earlier short: `rover/` (the newest, ~30 s: Mars with dust haze, mission control, a lawn; `fxRover`, `fxMower`), `penguin/` (~30 s: a Brazilian beach, an animal card `fxPenguin`), `petrock/` ( a 70s den, a bar, a beach, a gift shop; carrier/manual inserts), `thanksgiving/` (dining room, classroom, an Arizona street, a texting phone insert `fxChat`), or one from eliza, to `src/videos/<name>/`, rename the component and composition, and register it in `src/Root.tsx`. Add a `COMP` case to `render.sh`.
+3. Copy the closest earlier short: `comet/` (newest space set: star sphere + lumpy comet, craft cards with faces), `rover/` (the newest, ~30 s: Mars with dust haze, mission control, a lawn; `fxRover`, `fxMower`), `penguin/` (~30 s: a Brazilian beach, an animal card `fxPenguin`), `petrock/` ( a 70s den, a bar, a beach, a gift shop; carrier/manual inserts), `thanksgiving/` (dining room, classroom, an Arizona street, a texting phone insert `fxChat`), or one from eliza, to `src/videos/<name>/`, rename the component and composition, and register it in `src/Root.tsx`. Add a `COMP` case to `render.sh`.
 4. Once the take arrives: align, set `SHOTS`/`CAMS` to the words, then cast, build, captions, audio, stills, push.
 
 ## Thanksgiving-specific notes
@@ -189,3 +191,14 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
   lens so the hull hides the legs of whoever stands in it. The rowing boatman sits at y -0.2 so he sits IN the boat.
 - Score: an original jig in D on fife, plucked chords and a frame-drum snare; a slow music-box reprise for the boatman.
 - Captions: "nineteen eighty-three" -> "1983", "thirty-seven" -> "37".
+
+## Comet (Philae and Rosetta)-specific notes
+- Deep space as in eliza's voyager: `SPACE = [0, 420, -2700]`, `S(x, y, z)`, a star sphere (radius 180, unlit, no fog),
+  `SPACE_SHOTS` with fog pushed out in world.ts, sun `SPACE_SUN` az 70 / el 24.
+- The comet is `lumpy()` icospheres in build.ts: big lobe radius `CR` = 25 centred CR below S(0,0,0), kept smooth near
+  its top (`calm`) so cards stand on it at `surfY(x, z)`; a head lobe behind; boulders; flat crater discs. A map texture
+  on the icosphere streaked (bad UVs): plain colour + crater decals instead.
+- The craft are cards with ink-dot eyes: `fxLander` (gold box, solar tiles, three legs, antenna light, sleep z's) and
+  `fxOrbiter` (gold box, dish, long blue wings, 4.2 m card). `fxSignal`, `fxBeam`, `fxFound` (viewfinder insert).
+- In the crack the lander is tilted 0.55 rad and sunk 0.12 m; deeper/more tilted hid its face under the captions.
+- Captions: "twenty fourteen" -> "2014", "eighty-five" -> "85".

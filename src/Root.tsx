@@ -7,6 +7,7 @@ import { RoverShort, ROVER_FRAMES } from "./videos/rover/Rover";
 import { HugsShort, HUGS_FRAMES } from "./videos/hugs/Hugs";
 import { TruceShort, TRUCE_FRAMES } from "./videos/truce/Truce";
 import { DolphinShort, DOLPHIN_FRAMES } from "./videos/dolphin/Dolphin";
+import { CometShort, COMET_FRAMES } from "./videos/comet/Comet";
 export const Root: React.FC = () => (<>
   <Composition id="ThanksgivingShort" component={ThanksgivingShort} durationInFrames={THANKSGIVING_FRAMES} fps={30} width={1080} height={1920} />
   <Composition id="PetRockShort" component={PetRockShort} durationInFrames={PETROCK_FRAMES} fps={30} width={1080} height={1920} />
@@ -15,4 +16,5 @@ export const Root: React.FC = () => (<>
   <Composition id="HugsShort" component={HugsShort} durationInFrames={HUGS_FRAMES} fps={30} width={1080} height={1920} />
   <Composition id="TruceShort" component={TruceShort} durationInFrames={TRUCE_FRAMES} fps={30} width={1080} height={1920} />
   <Composition id="DolphinShort" component={DolphinShort} durationInFrames={DOLPHIN_FRAMES} fps={30} width={1080} height={1920} />
+  <Composition id="CometShort" component={CometShort} durationInFrames={COMET_FRAMES} fps={30} width={1080} height={1920} />
 </>);

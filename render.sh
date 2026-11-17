@@ -7,6 +7,7 @@
 #   COMP=HugsShort                  -> out/hugs_final.mp4          ("Free Hugs", ~32 s)
 #   COMP=TruceShort                 -> out/truce_final.mp4         ("Silent Night", ~32 s)
 #   COMP=DolphinShort               -> out/dolphin_final.mp4       ("The Dolphin Who Stayed", ~32 s)
+#   COMP=CometShort                 -> out/comet_final.mp4         ("Alone in the Dark", ~30 s)
 #   ./render.sh            -> out/thanksgiving_final.mp4  (1440x2560, 30 fps, h264 crf 16, soundtrack muxed)
 #   ./render.sh final --props='{"logo":true}'   extra options after the mode go to the renderer
 #                             (logo: put your logo at public/eliza/logo.png; captions:false = no subtitles)
@@ -26,7 +27,8 @@ case "$COMP" in
   HugsShort) MIX=production-hugs/audio/mix.wav; VID=out/hugs_video.mp4; FIN=out/hugs_final.mp4; PRE=out/hugs_preview.mp4 ;;
   TruceShort) MIX=production-truce/audio/mix.wav; VID=out/truce_video.mp4; FIN=out/truce_final.mp4; PRE=out/truce_preview.mp4 ;;
   DolphinShort) MIX=production-dolphin/audio/mix.wav; VID=out/dolphin_video.mp4; FIN=out/dolphin_final.mp4; PRE=out/dolphin_preview.mp4 ;;
-  *) echo "unknown COMP=$COMP (ThanksgivingShort | PetRockShort | PenguinShort | RoverShort | HugsShort | TruceShort | DolphinShort)"; exit 1 ;;
+  CometShort) MIX=production-comet/audio/mix.wav; VID=out/comet_video.mp4; FIN=out/comet_final.mp4; PRE=out/comet_preview.mp4 ;;
+  *) echo "unknown COMP=$COMP (ThanksgivingShort | PetRockShort | PenguinShort | RoverShort | HugsShort | TruceShort | DolphinShort | CometShort)"; exit 1 ;;
 esac
 case "$MODE" in final|preview|remux) shift || true ;; *) MODE=final ;; esac
 EXTRA=("$@")
