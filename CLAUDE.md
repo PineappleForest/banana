@@ -74,6 +74,10 @@ Earlier shorts to copy from (in eliza): `pigs/`, `voyager/`, `pasta/`, `cards/`,
    - The picture timing is mirrored inside make_audio.py, so any change to shot timing means re-running it.
 5. Lock the picture timing to the words: every visual reaction lands 0-3 frames before its word.
 
+## Direction (from Nov 2026)
+- The Mars rover short got the most views. New shorts follow that theme: machines/space/robots alone that do
+  something surprisingly human, true and strange. Length 20-30 s (~60-75 words with Mark).
+
 ## Story recipe that worked
 - Hook (an absurd true fact), then the setting, then three or four escalating beats, then the twist, then the turn to the lonely person, then Feeloy, then the CTA.
 - **CTA spoken: "Search Feeloy on the App Store."** End card: logo plus wordmark.
